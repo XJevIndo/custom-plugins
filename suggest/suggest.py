@@ -40,7 +40,7 @@ class Suggest(commands.Cog):
                     await reactionmsg.add_reaction(emoji)
                 suggestEmbed = discord.Embed(description=suggestion, color=self.bot.main_color)
                 suggestEmbed.set_footer(text="Vinns Hotel Suggestions | -suggest")
-                suggestEmbed.set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
+                suggestEmbed.set_author(name=ctx.author, icon_url=ctx.author.avatar)
                 embedTimeout = discord.Embed(description="❌ | You took too long! Command cancelled", color=15158332)
 
                 def check(r, u):
@@ -77,5 +77,5 @@ class Suggest(commands.Cog):
             print("cooldown")
 
 
-def setup(bot):
-    bot.add_cog(Suggest(bot))
+async def setup(bot):
+    await bot.add_cog(Suggest(bot))

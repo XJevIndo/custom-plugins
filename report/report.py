@@ -27,7 +27,7 @@ class Reports(commands.Cog):
             if ctx.guild.id == 814758983238942720:
                 staffChannel = self.bot.get_channel(818446997816082432)
                 guestChannel = self.bot.get_channel(818447055810199552)
-            
+
             texta = """**React with the type of your report:**
   1️⃣ | Staff Report
   2️⃣ | Guest Report
@@ -45,8 +45,8 @@ class Reports(commands.Cog):
                 return msg.channel == ctx.channel and msg.author == ctx.author
 
             def cancel_check(msg: discord.Message):
-              return msg.content.lower() == "cancel" or msg.content.lower() == f"{ctx.prefix}cancel"
-            
+                return msg.content.lower() == "cancel" or msg.content.lower() == f"{ctx.prefix}cancel"
+
             def check(r, u):
                 return u == ctx.author
 
@@ -58,59 +58,64 @@ class Reports(commands.Cog):
             if str(reaction.emoji) == '1️⃣':
                 await reactionmsg.clear_reactions()
 
-                text = "**Staff Report**\nWhat is the username of the user you're reporting? You have 2 minutes to reply.\n\n*Say 'cancel' to cancel the report.*"
+                text = "**Staff Report**\nWhat is the username of the user you're reporting? You have 2 minutes to " \
+                       "reply.\n\n*Say 'cancel' to cancel the report.* "
                 await reactionmsg.edit(embed=discord.Embed(description=text, color=self.bot.main_color))
 
                 try:
                     username = await self.bot.wait_for('message', check=checkmsg, timeout=120)
                     if cancel_check(username) is True:
-                      cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
-                      await reactionmsg.edit(embed=cancelEmbed)
-                      await reactionmsg.clear_reactions()
-                      return
+                        cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
+                        await reactionmsg.edit(embed=cancelEmbed)
+                        await reactionmsg.clear_reactions()
+                        return
                 except asyncio.TimeoutError:
 
                     return await reactionmsg.edit(embed=embedTimeout)
                 await username.delete()
 
-                text = "**Staff Report**\nWhat is the rank of the suspect? You have 2 minutes to reply.\n\n*Say 'cancel' to cancel the report.*"
+                text = "**Staff Report**\nWhat is the rank of the suspect? You have 2 minutes to reply.\n\n*Say " \
+                       "'cancel' to cancel the report.* "
                 await reactionmsg.edit(embed=discord.Embed(description=text, color=self.bot.main_color))
 
                 try:
                     rank = await self.bot.wait_for('message', check=checkmsg, timeout=120)
                     if cancel_check(rank) is True:
-                      cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
-                      await reactionmsg.edit(embed=cancelEmbed)
-                      await reactionmsg.clear_reactions()
-                      return
+                        cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
+                        await reactionmsg.edit(embed=cancelEmbed)
+                        await reactionmsg.clear_reactions()
+                        return
                 except asyncio.TimeoutError:
                     return await reactionmsg.edit(embed=embedTimeout)
                 await rank.delete()
 
-                text = "**Staff Report**\nWhat is the reason for this report? You have 2 minutes to reply.\n\n*Say 'cancel' to cancel the report.*"
+                text = "**Staff Report**\nWhat is the reason for this report? You have 2 minutes to reply.\n\n*Say " \
+                       "'cancel' to cancel the report.* "
                 await reactionmsg.edit(embed=discord.Embed(description=text, color=self.bot.main_color, ))
 
                 try:
                     reason = await self.bot.wait_for('message', check=checkmsg, timeout=120)
                     if cancel_check(reason) is True:
-                      cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
-                      await reactionmsg.edit(embed=cancelEmbed)
-                      await reactionmsg.clear_reactions()
-                      return
+                        cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
+                        await reactionmsg.edit(embed=cancelEmbed)
+                        await reactionmsg.clear_reactions()
+                        return
                 except asyncio.TimeoutError:
                     return await reactionmsg.edit(embed=embedTimeout)
                 await reason.delete()
 
-                text = "**Staff Report**\nPlease provide proof of this happening. You can upload a video/image or use a link to an image or video. The report will be sent right after. You have 10 minutes to reply.\n\n*Say 'cancel' to cancel the report.*"
+                text = "**Staff Report**\nPlease provide proof of this happening. You can upload a video/image or use " \
+                       "a link to an image or video. The report will be sent right after. You have 10 minutes to " \
+                       "reply.\n\n*Say 'cancel' to cancel the report.* "
                 await reactionmsg.edit(embed=discord.Embed(description=text, color=self.bot.main_color))
 
                 try:
                     proof = await self.bot.wait_for('message', check=checkmsg, timeout=600)
                     if cancel_check(proof) is True:
-                      cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
-                      await reactionmsg.edit(embed=cancelEmbed)
-                      await reactionmsg.clear_reactions()
-                      return
+                        cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
+                        await reactionmsg.edit(embed=cancelEmbed)
+                        await reactionmsg.clear_reactions()
+                        return
                 except asyncio.TimeoutError:
                     return await reactionmsg.edit(embed=embedTimeout)
                 my_files = [await x.to_file() for x in proof.attachments]
@@ -122,7 +127,7 @@ class Reports(commands.Cog):
                 reportEmbed.add_field(name="Reason:", value=reason.content)
                 if proof.content:
                     reportEmbed.add_field(name="Proof:", value=proof.content)
-                reportEmbed.set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
+                reportEmbed.set_author(name=ctx.author, icon_url=ctx.author.avatar)
 
                 await staffChannel.send(content="---------------------------", embed=reportEmbed, files=my_files)
                 text = "✅ | The report has successfully been sent!"
@@ -131,45 +136,49 @@ class Reports(commands.Cog):
             if str(reaction.emoji) == '2️⃣':
                 await reactionmsg.clear_reactions()
 
-                text = "**Guest Report**\nWhat is the username of the user you're reporting? You have 2 minutes to reply.\n\n*Say 'cancel' to cancel the report.*"
+                text = "**Guest Report**\nWhat is the username of the user you're reporting? You have 2 minutes to " \
+                       "reply.\n\n*Say 'cancel' to cancel the report.* "
                 await reactionmsg.edit(embed=discord.Embed(description=text, color=self.bot.main_color))
 
                 try:
                     username = await self.bot.wait_for('message', check=checkmsg, timeout=120)
                     if cancel_check(username) is True:
-                      cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
-                      await reactionmsg.edit(embed=cancelEmbed)
-                      await reactionmsg.clear_reactions()
-                      return
+                        cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
+                        await reactionmsg.edit(embed=cancelEmbed)
+                        await reactionmsg.clear_reactions()
+                        return
                 except asyncio.TimeoutError:
 
                     return await reactionmsg.edit(embed=embedTimeout)
                 await username.delete()
 
-                text = "**Guest Report**\nWhat is the reason for this report? You have 2 minutes to reply.\n\n*Say 'cancel' to cancel the report.*"
+                text = "**Guest Report**\nWhat is the reason for this report? You have 2 minutes to reply.\n\n*Say " \
+                       "'cancel' to cancel the report.* "
                 await reactionmsg.edit(embed=discord.Embed(description=text, color=self.bot.main_color, ))
 
                 try:
                     reason = await self.bot.wait_for('message', check=checkmsg, timeout=120)
                     if cancel_check(reason) is True:
-                      cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
-                      await reactionmsg.edit(embed=cancelEmbed)
-                      await reactionmsg.clear_reactions()
-                      return
+                        cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
+                        await reactionmsg.edit(embed=cancelEmbed)
+                        await reactionmsg.clear_reactions()
+                        return
                 except asyncio.TimeoutError:
                     return await reactionmsg.edit(embed=embedTimeout)
                 await reason.delete()
 
-                text = "**Guest Report**\nPlease provide proof of this happening. You can upload a video/image or use a link to an image or video. The report will be sent right after. You have 10 minutes to reply.\n\n*Say 'cancel' to cancel the report.*"
+                text = "**Guest Report**\nPlease provide proof of this happening. You can upload a video/image or use " \
+                       "a link to an image or video. The report will be sent right after. You have 10 minutes to " \
+                       "reply.\n\n*Say 'cancel' to cancel the report.* "
                 await reactionmsg.edit(embed=discord.Embed(description=text, color=self.bot.main_color))
 
                 try:
                     proof = await self.bot.wait_for('message', check=checkmsg, timeout=600)
                     if cancel_check(proof) is True:
-                      cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
-                      await reactionmsg.edit(embed=cancelEmbed)
-                      await reactionmsg.clear_reactions()
-                      return
+                        cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
+                        await reactionmsg.edit(embed=cancelEmbed)
+                        await reactionmsg.clear_reactions()
+                        return
                 except asyncio.TimeoutError:
                     return await reactionmsg.edit(embed=embedTimeout)
                 my_files = [await x.to_file() for x in proof.attachments]
@@ -180,7 +189,7 @@ class Reports(commands.Cog):
                 if proof.content:
                     reportEmbed.add_field(name="Proof:", value=proof.content)
                 reportEmbed.add_field(name="Reason:", value=reason.content)
-                reportEmbed.set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
+                reportEmbed.set_author(name=ctx.author, icon_url=ctx.author.avatar)
                 await guestChannel.send(content="---------------------------", embed=reportEmbed, files=my_files)
                 text = "✅ | The report has successfully been sent!"
                 await reactionmsg.edit(embed=discord.Embed(description=text, color=3066993))
@@ -193,5 +202,5 @@ class Reports(commands.Cog):
             print("cooldown")
 
 
-def setup(bot):
-    bot.add_cog(Reports(bot))
+async def setup(bot):
+    await bot.add_cog(Reports(bot))
