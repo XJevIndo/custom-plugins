@@ -22,24 +22,24 @@ class Suggest(commands.Cog):
         Suggest something!
 
         **Usage**:
-        -suggest You should add cars so guest can be driven to their rooms.
+        ?suggest Please add water to the menu!
         """
         try:
-            if ctx.guild.id == 686214712354144387:
-                discChannel = self.bot.get_channel(686858225743822883)
-                trainingChannel = self.bot.get_channel(686253519350923280)
-                hotelChannel = self.bot.get_channel(777656824098062385)
+            if ctx.guild.id == 1012278060499865610:
+                discChannel = self.bot.get_channel(1034052086347874356)
+                trainingChannel = self.bot.get_channel(1034052179272675379)
+                cafeChannel = self.bot.get_channel(1034052039300358154)
                 texta = """**React with the type of your suggestion:**
-  <:Discord:795240449103233024> | Discord Suggestion
-  🏨 | Hotel Suggestion
-  <:studio:639558945584840743> | Training Center Suggestion
+  ✉️ | Discord Suggestion
+  🏢 | Cafe Suggestion
+  🔨 | Training Center Suggestion
   ❌ | Cancel Command"""
                 embed1 = discord.Embed(description=texta, color=self.bot.main_color)
                 reactionmsg = await ctx.send(content=f"<@!{ctx.author.id}>", embed=embed1)
-                for emoji in ('<:Discord:795240449103233024>', '🏨', '<:studio:639558945584840743>', '❌'):
+                for emoji in ('✉️', '🏨', '🔨', '❌'):
                     await reactionmsg.add_reaction(emoji)
                 suggestEmbed = discord.Embed(description=suggestion, color=self.bot.main_color)
-                suggestEmbed.set_footer(text="Vinns Hotel Suggestions | -suggest")
+                suggestEmbed.set_footer(text="Latte Cafe Suggestions")
                 suggestEmbed.set_author(name=ctx.author, icon_url=ctx.author.avatar)
                 embedTimeout = discord.Embed(description="❌ | You took too long! Command cancelled", color=15158332)
 
@@ -50,18 +50,18 @@ class Suggest(commands.Cog):
                     reaction, user = await self.bot.wait_for("reaction_add", check=check, timeout=60)
                 except asyncio.TimeoutError:
                     await reactionmsg.edit(embed=embedTimeout)
-                if str(reaction.emoji) == '<:Discord:795240449103233024>':
+                if str(reaction.emoji) == ' ✉️':
                     sugmsg = await discChannel.send(content=f"<@!{user.id}>", embed=suggestEmbed)
                     editEmbed = discord.Embed(description=f"✅ | Successfully sent your suggestion to <#{discChannel.id}>",
                                               color=3066993)
                     await reactionmsg.edit(embed=editEmbed)
-                if str(reaction.emoji) == '🏨':
+                if str(reaction.emoji) == '🏢':
                     sugmsg = await hotelChannel.send(content=f"<@!{user.id}>", embed=suggestEmbed)
-                    editEmbed = discord.Embed(description=f"✅ | Successfully sent your suggestion to <#{hotelChannel.id}>",
+                    editEmbed = discord.Embed(description=f"✅ | Successfully sent your suggestion to <#{cafeChannel.id}>",
                                               color=3066993)
                     await reactionmsg.edit(embed=editEmbed)
 
-                if str(reaction.emoji) == '<:studio:639558945584840743>':
+                if str(reaction.emoji) == ' 🔨':
                     sugmsg = await trainingChannel.send(content=f"<@!{user.id}>", embed=suggestEmbed)
                     editEmbed = discord.Embed(
                         description=f"✅ | Successfully sent your suggestion to <#{trainingChannel.id}>", color=3066993)
@@ -71,7 +71,7 @@ class Suggest(commands.Cog):
                     await reactionmsg.edit(embed=editEmbed)
                 await reactionmsg.clear_reactions()
                 for emoji in (
-                '<:Approve:818120227387998258>', '<:Neutral:818120929057046548>', '<:Disapprove:818120194135425024>'):
+                '🟢', '🟡', '🔴'):
                     await sugmsg.add_reaction(emoji)
         except discord.ext.commands.CommandOnCooldown:
             print("cooldown")
