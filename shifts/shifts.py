@@ -101,13 +101,13 @@ class Shift(commands.Cog):
                                   color=0xe74c3c)
             await ctx.send(embed=embed)
         embed2 = discord.Embed(title="Latte Cafe Shifts",
-                               description=f"The shift by **{ctx.author.mention} | {ctx.author.name}#{ctx.author.discriminator}** has ended! Please be on a look out for a future shift.",
+                               description=f"The shift by **{ctx.author.mention} | {ctx.author.name}#{ctx.author.discriminator}** has ended! You can always attend next shift.",
                                color=0xe74c3c)
         embed2.set_thumbnail(
             url="https://cdn.discordapp.com/icons/1012278060499865610/fa261db6bfb06e127b63c0865cd9c6ca.webp")
         embed2.set_footer(text="Latte Corporation")
         await message.edit(embed=embed2, content=shift_mention)  # <@&695243187043696650>
-        await ctx.send("<a:check:742680789262663710> | Shift has ended! Message will be deleted soon.")
+        await ctx.send("<a:check:742680789262663710> | Thanks for Hosting a Shift! Now your shift has ended! Message will be deleted soon.")
         await asyncio.sleep(1200)
         await message.delete()
 
