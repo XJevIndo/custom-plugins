@@ -27,10 +27,10 @@ class Reports(commands.Cog):
             if ctx.guild.id == 814758983238942720:
                 staffChannel = self.bot.get_channel(818446997816082432)
                 guestChannel = self.bot.get_channel(818447055810199552)
-
+             
             texta = """**React with the type of your report:**
   1️⃣ | Staff Report
-  2️⃣ | Guest Report
+  2️⃣ | Customer/Non-Staff Report
   ❌ | Cancel
   """
 
@@ -58,12 +58,12 @@ class Reports(commands.Cog):
             if str(reaction.emoji) == '1️⃣':
                 await reactionmsg.clear_reactions()
 
-                text = "**Staff Report**\nWhat is the username of the user you're reporting? You have 2 minutes to " \
+                text = "**Staff Report**\nWhat is the username of the user you're reporting? You have 5 minutes to " \
                        "reply.\n\n*Say 'cancel' to cancel the report.* "
                 await reactionmsg.edit(embed=discord.Embed(description=text, color=self.bot.main_color))
 
                 try:
-                    username = await self.bot.wait_for('message', check=checkmsg, timeout=120)
+                    username = await self.bot.wait_for('message', check=checkmsg, timeout=360)
                     if cancel_check(username) is True:
                         cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
                         await reactionmsg.edit(embed=cancelEmbed)
@@ -74,12 +74,12 @@ class Reports(commands.Cog):
                     return await reactionmsg.edit(embed=embedTimeout)
                 await username.delete()
 
-                text = "**Staff Report**\nWhat is the rank of the suspect? You have 2 minutes to reply.\n\n*Say " \
+                text = "**Staff Report**\nWhat is the rank of the suspect? You have 5 minutes to reply.\n\n*Say " \
                        "'cancel' to cancel the report.* "
                 await reactionmsg.edit(embed=discord.Embed(description=text, color=self.bot.main_color))
 
                 try:
-                    rank = await self.bot.wait_for('message', check=checkmsg, timeout=120)
+                    rank = await self.bot.wait_for('message', check=checkmsg, timeout=360)
                     if cancel_check(rank) is True:
                         cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
                         await reactionmsg.edit(embed=cancelEmbed)
@@ -89,12 +89,12 @@ class Reports(commands.Cog):
                     return await reactionmsg.edit(embed=embedTimeout)
                 await rank.delete()
 
-                text = "**Staff Report**\nWhat is the reason for this report? You have 2 minutes to reply.\n\n*Say " \
+                text = "**Staff Report**\nWhat is the reason for this report? You have 5 minutes to reply.\n\n*Say " \
                        "'cancel' to cancel the report.* "
                 await reactionmsg.edit(embed=discord.Embed(description=text, color=self.bot.main_color, ))
 
                 try:
-                    reason = await self.bot.wait_for('message', check=checkmsg, timeout=120)
+                    reason = await self.bot.wait_for('message', check=checkmsg, timeout=360)
                     if cancel_check(reason) is True:
                         cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
                         await reactionmsg.edit(embed=cancelEmbed)
@@ -136,12 +136,12 @@ class Reports(commands.Cog):
             if str(reaction.emoji) == '2️⃣':
                 await reactionmsg.clear_reactions()
 
-                text = "**Guest Report**\nWhat is the username of the user you're reporting? You have 2 minutes to " \
+                text = "**Customer/Non-Staff Report**\nWhat is the username of the user you're reporting? You have 5 minutes to " \
                        "reply.\n\n*Say 'cancel' to cancel the report.* "
                 await reactionmsg.edit(embed=discord.Embed(description=text, color=self.bot.main_color))
 
                 try:
-                    username = await self.bot.wait_for('message', check=checkmsg, timeout=120)
+                    username = await self.bot.wait_for('message', check=checkmsg, timeout=360)
                     if cancel_check(username) is True:
                         cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
                         await reactionmsg.edit(embed=cancelEmbed)
@@ -152,12 +152,12 @@ class Reports(commands.Cog):
                     return await reactionmsg.edit(embed=embedTimeout)
                 await username.delete()
 
-                text = "**Guest Report**\nWhat is the reason for this report? You have 2 minutes to reply.\n\n*Say " \
+                text = "*Customer/Non-Staff Report**\nWhat is the reason for this report? You have 5 minutes to reply.\n\n*Say " \
                        "'cancel' to cancel the report.* "
                 await reactionmsg.edit(embed=discord.Embed(description=text, color=self.bot.main_color, ))
 
                 try:
-                    reason = await self.bot.wait_for('message', check=checkmsg, timeout=120)
+                    reason = await self.bot.wait_for('message', check=checkmsg, timeout=360)
                     if cancel_check(reason) is True:
                         cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
                         await reactionmsg.edit(embed=cancelEmbed)
@@ -167,7 +167,7 @@ class Reports(commands.Cog):
                     return await reactionmsg.edit(embed=embedTimeout)
                 await reason.delete()
 
-                text = "**Guest Report**\nPlease provide proof of this happening. You can upload a video/image or use " \
+                text = "**Customer/Non-Staff Report**\nPlease provide proof of this happening. You can upload a video/image or use " \
                        "a link to an image or video. The report will be sent right after. You have 10 minutes to " \
                        "reply.\n\n*Say 'cancel' to cancel the report.* "
                 await reactionmsg.edit(embed=discord.Embed(description=text, color=self.bot.main_color))
@@ -184,7 +184,7 @@ class Reports(commands.Cog):
                 my_files = [await x.to_file() for x in proof.attachments]
                 await proof.delete()
 
-                reportEmbed = discord.Embed(title="New Guest Report", color=self.bot.main_color)
+                reportEmbed = discord.Embed(title="New Customer/Non-Staff Report", color=self.bot.main_color)
                 reportEmbed.add_field(name="Username:", value=username.content)
                 if proof.content:
                     reportEmbed.add_field(name="Proof:", value=proof.content)
