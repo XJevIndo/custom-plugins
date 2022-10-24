@@ -8,7 +8,7 @@ from core.models import PermissionLevel
 
 
 class Shift(commands.Cog):
-    """An easy way for HR's to manage shift announcements."""
+    """Shift Announcement System"""
 
     def __init__(self, bot):
         self.bot = bot
@@ -54,14 +54,13 @@ class Shift(commands.Cog):
                 shift_mention = ""
 
             embed = discord.Embed(
-                description="Salutations, a shift is currently being hosted at the hotel! Come to the hotel for a "
-                            "nice and comfy room! Active staff may get a chance of promotion.",
+                description="Salutations, a shift is currently being hosted at the Cafe! Head down to Cafe and get our signature Coffee!",
                 timestamp=datetime.datetime.utcnow())
             embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar)
             embed.color = self.bot.main_color
             embed.set_thumbnail(
-                url="https://cdn.discordapp.com/attachments/633681171879952384/990312929712799774/phonto.png")
-            embed.set_footer(text="Vinns Hotel")
+                url="https://cdn.discordapp.com/icons/1012278060499865610/fa261db6bfb06e127b63c0865cd9c6ca.webp")
+            embed.set_footer(text="Latte Corporation")
 
             embed.add_field(name="Host:",
                             value=f"{ctx.author.mention} | {ctx.author.name}#{ctx.author.discriminator} | {ctx.author.nick}",
@@ -71,14 +70,14 @@ class Shift(commands.Cog):
             timestamp_show = f"<t:{timestamp}:R>"
             embed.add_field(name="Session Status:", value=f"Started {timestamp_show}", inline=False)
             embed.add_field(name="Hotel Link:",
-                            value=f"Click [here](https://www.roblox.com/games/4766198689/Vinns-Hotels-and-Resorts-V1#).",
+                            value=f"Click [here](https://www.roblox.com/games/7652681872/Latt-Caf-In-Dev).",
                             inline=False)
 
             msggg = await setchannel.send(shift_mention, embed=embed)
             await asyncio.sleep(5)
             await msggg.edit(content=f"{shift_mention} | msgID: {msggg.id}", embed=embed)
             await ctx.send(
-                "<a:check:742680789262663710> | Shift announcement has been posted!\n||shifts system v2 soon™||")
+                "<a:check:742680789262663710> | Shift announcement has been posted!")
         except discord.ext.commands.CommandOnCooldown:
             print("cooldown")
 
@@ -101,15 +100,15 @@ class Shift(commands.Cog):
                                               "https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-)",
                                   color=0xe74c3c)
             await ctx.send(embed=embed)
-        embed2 = discord.Embed(title="Vinns Hotel Shifts",
+        embed2 = discord.Embed(title="Latte Cafe Shifts",
                                description=f"The shift by **{ctx.author.mention} | {ctx.author.name}#{ctx.author.discriminator}** has ended! Please be on a look out for a future shift.",
                                color=0xe74c3c)
         embed2.set_thumbnail(
-            url="https://cdn.discordapp.com/attachments/633681171879952384/990312929712799774/phonto.png")
-        embed2.set_footer(text="Vinns Hotel")
+            url="https://cdn.discordapp.com/icons/1012278060499865610/fa261db6bfb06e127b63c0865cd9c6ca.webp")
+        embed2.set_footer(text="Latte Corporation")
         await message.edit(embed=embed2, content=shift_mention)  # <@&695243187043696650>
-        await ctx.send("<a:check:742680789262663710> | Shift announcement has been edited and the shift has ended!")
-        await asyncio.sleep(600)
+        await ctx.send("<a:check:742680789262663710> | Shift has ended! Message will be deleted soon.")
+        await asyncio.sleep(1200)
         await message.delete()
 
 
