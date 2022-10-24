@@ -69,7 +69,7 @@ class Shift(commands.Cog):
             timestamp = round(datetime.datetime.timestamp(started_at))
             timestamp_show = f"<t:{timestamp}:R>"
             embed.add_field(name="Session Status:", value=f"Started {timestamp_show}", inline=False)
-            embed.add_field(name="Hotel Link:",
+            embed.add_field(name="Cafe Link:",
                             value=f"Click [here](https://www.roblox.com/games/7652681872/Latt-Caf-In-Dev).",
                             inline=False)
 
