@@ -8,7 +8,7 @@ from core.models import PermissionLevel
 
 
 class Training(commands.Cog):
-    """An easy way for HR's to manage training announcements."""
+    """Training Announcement System"""
 
     def __init__(self, bot):
         self.bot = bot
@@ -60,20 +60,19 @@ class Training(commands.Cog):
             embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar)
             embed.color = self.bot.main_color
             embed.set_thumbnail(
-                url="https://cdn.discordapp.com/attachments/633681171879952384/990312929712799774/phonto.png")
-            embed.set_footer(text="Vinns Hotel")
+                url="https://cdn.discordapp.com/icons/1012278060499865610/fa261db6bfb06e127b63c0865cd9c6ca.webp")
+            embed.set_footer(text="Latte Corporation")
 
             embed.add_field(name="Host:",
                             value=f"{ctx.author.mention} | {ctx.author.name}#{ctx.author.discriminator} | {ctx.author.nick}",
                             inline=False)
-            embed.add_field(name="Session Status:", value=f"Open", inline=False)
-            embed.add_field(name="Training Link:", value=f"Click [here](https://www.roblox.com/games/4780049434).",
+            embed.add_field(name="Training Link:", value=f"Click [here](https://www.roblox.com/games/7982194070/Training-Center-Latte-In-Dev).",
                             inline=False)
             msggg = await setchannel.send(training_mention, embed=embed)
             await asyncio.sleep(5)
             await msggg.edit(content=f"{training_mention} | msgID: {msggg.id}", embed=embed)
             await ctx.send(
-                "<a:check:742680789262663710> | Training announcement has been posted!\n||trainings system v2 soon™||")
+                "<a:check:742680789262663710> | Training announcement has been posted!")
         except discord.ext.commands.CommandOnCooldown:
             print("cooldown")
 
@@ -96,17 +95,17 @@ class Training(commands.Cog):
                                               "https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-)",
                                   color=0xe74c3c)
             await ctx.send(embed=embed)
-        embed2 = discord.Embed(title="Vinns Hotel Trainings",
-                               description=f"The training by **{ctx.author.mention} | {ctx.author.name}#{ctx.author.discriminator}** has concluded! Please be on a look out for a future training.",
+        embed2 = discord.Embed(title="Latte Cafe",
+                               description=f"The training by **{ctx.author.mention} | {ctx.author.name}#{ctx.author.discriminator}** has concluded! You can see our Trello to see our Training Schedule or See Training Center description.",
                                color=0xe74c3c)
         embed2.set_thumbnail(
-            url="https://cdn.discordapp.com/attachments/633681171879952384/990312929712799774/phonto.png")
-        embed2.set_footer(text="Vinns Hotel")
+            url="https://cdn.discordapp.com/icons/1012278060499865610/fa261db6bfb06e127b63c0865cd9c6ca.webp")
+        embed2.set_footer(text="Latte Corporation")
         await message.edit(embed=embed2, content=training_mention)  # <@&695243187043696650>
 
         await ctx.send(
             "<a:check:742680789262663710> | Training announcement has been edited and the training has ended!")
-        await asyncio.sleep(600)
+        await asyncio.sleep(1200)
         await message.delete()
 
 
