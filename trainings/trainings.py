@@ -39,7 +39,7 @@ class Training(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command(aliases=["train"])
-    @checks.has_permissions(PermissionLevel.OWNER)
+    @checks.has_permissions(PermissionLevel.MODERATOR)
     @commands.cooldown(1, 1800, commands.BucketType.user)
     async def training(self, ctx):
         """Host a training."""
@@ -66,18 +66,18 @@ class Training(commands.Cog):
             embed.add_field(name="Host:",
                             value=f"{ctx.author.mention} | {ctx.author.name}#{ctx.author.discriminator} | {ctx.author.nick}",
                             inline=False)
-            embed.add_field(name="Training Link:", value=f"Click [here](https://www.roblox.com/games/7982194070/Training-Center-Latte-In-Dev).",
+            embed.add_field(name="Training Center Link:", value=f"Click [here](https://www.roblox.com/games/7982194070/Training-Center-Latte-In-Dev).",
                             inline=False)
             msggg = await setchannel.send(training_mention, embed=embed)
             await asyncio.sleep(5)
             await msggg.edit(content=f"{training_mention} | msgID: {msggg.id}", embed=embed)
             await ctx.send(
-                "<a:check:742680789262663710> | Training announcement has been posted!")
+                "<a:check:1012278060499865610> | Training announcement has been posted!")
         except discord.ext.commands.CommandOnCooldown:
             print("cooldown")
 
     @commands.command(aliases=["et"])
-    @checks.has_permissions(PermissionLevel.OWNER)
+    @checks.has_permissions(PermissionLevel.MODERATOR)
     async def endtraining(self, ctx, *, msgID: str):
         """End a training."""
         config = await self.db.find_one({"_id": "config"})
@@ -104,7 +104,7 @@ class Training(commands.Cog):
         await message.edit(embed=embed2, content=training_mention)  # <@&695243187043696650>
 
         await ctx.send(
-            "<a:check:742680789262663710> | Training announcement has been edited and the training has ended!")
+            "<a:check:1012278060499865610> | Training announcement has been edited and the training has ended!")
         await asyncio.sleep(1200)
         await message.delete()
 
