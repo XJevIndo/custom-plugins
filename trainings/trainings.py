@@ -104,7 +104,7 @@ class Training(commands.Cog):
         await message.edit(embed=embed2, content=training_mention)  # <@&695243187043696650>
 
         await ctx.send(
-            "<a:succces:742680789262663710> | Training announcement has been edited and the training has ended!")
+            ":success: | Training announcement has been edited and the training has ended!")
         await asyncio.sleep(1200)
         await message.delete()
 
