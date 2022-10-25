@@ -72,7 +72,7 @@ class Training(commands.Cog):
             await asyncio.sleep(5)
             await msggg.edit(content=f"{training_mention} | msgID: {msggg.id}", embed=embed)
             await ctx.send(
-                "<a:check:1012278060499865610> | Training announcement has been posted!")
+                "<a:check:1034359295548084305> | Training announcement has been posted!")
         except discord.ext.commands.CommandOnCooldown:
             print("cooldown")
 
@@ -104,7 +104,7 @@ class Training(commands.Cog):
         await message.edit(embed=embed2, content=training_mention)  # <@&695243187043696650>
 
         await ctx.send(
-            "<a:check:1012278060499865610> | Training announcement has been edited and the training has ended!")
+            "<a:check:1034359295548084305> | Training announcement has been edited and the training has ended!")
         await asyncio.sleep(1200)
         await message.delete()
 
