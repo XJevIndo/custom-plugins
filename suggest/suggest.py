@@ -36,7 +36,7 @@ class Suggest(commands.Cog):
   ❌ | Cancel Command"""
                 embed1 = discord.Embed(description=texta, color=self.bot.main_color)
                 reactionmsg = await ctx.send(content=f"<@!{ctx.author.id}>", embed=embed1)
-                for emoji in ('✉️', '🏨', '🔨', '❌'):
+                for emoji in ('✉️', '🏢', '🔨', '❌'):
                     await reactionmsg.add_reaction(emoji)
                 suggestEmbed = discord.Embed(description=suggestion, color=self.bot.main_color)
                 suggestEmbed.set_footer(text="Latte Cafe Suggestions")
